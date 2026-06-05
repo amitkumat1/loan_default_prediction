@@ -38,12 +38,45 @@ class ModelTrainer:
             models = {   
                       'Logistic Regression' : LogisticRegression(),
                       'Decision Tree' : DecisionTreeClassifier(),
-                      'Random Forest' : RandomForestClassifier(),
                       'Naive Bayes' : GaussianNB(),
+                      'Random Forest' : RandomForestClassifier(),
                       'KNN' : KNeighborsClassifier()
                     }
             
-            model_report:dict = evaluate_models(X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test, models=models)
+            params={
+                     'Logistic Regression': {
+                         'C': [0.1, 1, 10],
+                         'penalty': ['l2'],
+                         'solver': ['liblinear'],
+                         'max_iter': [100]
+                     },
+
+                     'Decision Tree': {
+                         'criterion': ['gini'],
+                         'max_depth': [None, 10],
+                         'min_samples_split': [2, 5],
+                         'min_samples_leaf': [1, 2]
+                     },
+
+                     'Random Forest': {
+                         'n_estimators': [100, 200],
+                         'max_depth': [None, 10],
+                         'min_samples_split': [2, 5],
+                         'min_samples_leaf': [1, 2]
+                     },
+
+                     'Naive Bayes': {
+                         'var_smoothing': [1e-09, 1e-07]
+                     },
+
+                     'KNN': {
+                         'n_neighbors': [3, 5, 7],
+                         'weights': ['uniform'],
+                         'metric': ['euclidean', 'manhattan']
+                     }
+                    }
+
+            model_report:dict = evaluate_models(X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test, models=models, params=params)
 
             best_model_score = max(sorted(model_report.values()))
             best_model_name = list(model_report.keys())[
@@ -68,6 +101,5 @@ class ModelTrainer:
 
             return score
         
-
         except Exception as e:
             raise CustomException(e, sys)
