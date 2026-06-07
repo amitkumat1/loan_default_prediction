@@ -1,0 +1,171 @@
+<html>
+<body>
+    <div class="login">
+   
+       <form action="{{ url_for('predict_datapoint')}}" method="post">
+        <h1>
+            <legend>Loan Default Prediction</legend>
+        </h1>
+        <div class="mb-3">
+            <label class="form-label">MaritalStatus</label>
+            <select class="form-control" name="marital_status" placeholder="Enter your Marital Status" required>
+                <option class="placeholder" selected disabled value="">Select your Marital Status</option>
+                <option value="single">
+                    Single
+                </option>
+                <option value="Divorced">
+                    Divorced
+                </option>
+                <option value="Married">
+                    Married
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">EmploymentType</label>
+            <select class="form-control" name="EmploymentType" placeholder="Enter you EmploymentType" required>
+                <option class="placeholder" selected disabled value="">Select Employment Type</option>
+                <option value="Full-Time">
+                    Full-Time
+                </option>
+                <option value="Part-Time">
+                    Part-Time
+                </option>
+                <option value="Unemployed">
+                    Unemployed
+                </option>
+                <option value="Self-employed">
+                    Self-employed
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Education</label>
+            <select class="form-control" name="Education"
+                placeholder="Enter your Education" required>
+                <option class="placeholder" selected disabled value="">Select Education</option>
+                <option value="High School">
+                    High School
+                </option>
+                <option value="Bachelor's">
+                    Bachelor's
+                </option>
+                <option value="Master's">
+                    Master's
+                </option>
+                <option value="PhD">
+                    PhD
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">HasMortgage</label>
+            <select class="form-control" name="HasMortgage" placeholder="HasMortgage" required>
+                <option class="placeholder" selected disabled value="">Has Mortgage</option>
+                <option value="Yes">
+                    Yes
+                </option>
+                <option value="No">
+                    No
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">HasDependents</label>
+            <select class="form-control" name="HasDependents" placeholder="HasDependents" required>
+                <option class="placeholder" selected disabled value="">Has Dependents</option>
+                <option value="Yes">
+                    Yes
+                </option>
+                <option value="No">
+                    No
+                </option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">HasCoSigner</label>
+            <select class="form-control" name="HasCoSigner" placeholder="HasCoSigner" required>
+                <option class="placeholder" selected disabled value="">Has Co-Signer</option>
+                <option value="Yes">
+                    Yes
+                </option>
+                <option value="No">
+                    No
+                </option>
+            </select>
+        </div>
+    
+        <div class="mb-3">
+            <label class="form-label">LoanPurpose</label>
+            <select class="form-control" name="LoanPurpose" placeholder="Enter you LoanPurpose" required>
+                <option class="placeholder" selected disabled value="">Select LoanPurpose</option>
+                <option value="Auto">
+                    Auto
+                </option>
+                <option value="Business">
+                    Business
+                </option>
+                <option value="Home">
+                    Home
+                </option>
+                <option value="Others">
+                    Others
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">InterestRate</label>
+            <input class="form-control" type="number" name="InterestRate"
+                placeholder="Enter your Interest Rate" min='0' max='100'/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">LoanAmount</label>
+            <input class="form-control" type="number" name="LoanAmount"
+                placeholder="Enter your Loan Amount" min='0'/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">CreditScore</label>
+            <input class="form-control" type="number" name="CreditScore"
+                placeholder="Enter your Credit Score" min='0' max='1000'/>
+        </div>
+         <div class="mb-3">
+            <label class="form-label">Age</label>
+            <input class="form-control" type="number" name="Age"
+                placeholder="Enter your Age" min='0' max='120'/>
+        </div>
+         <div class="mb-3">
+            <label class="form-label">Income</label>
+            <input class="form-control" type="number" name="Income"
+                placeholder="Enter your Income" min='0'/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">NumCreditLines</label>
+            <input class="form-control" type="number" name="NumCreditLines"
+                placeholder="Enter your Number of Credit Lines" min='0'/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">DTIRatio</label>
+            <input class="form-control" type="number" name="DTIRatio"
+                placeholder="Enter your Debt-to-Income Ratio", step="0.01" inputmode="decimal" min="0"/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">LoanTerm</label>
+            <input class="form-control" type="number" name="LoanTerm"
+                placeholder="Enter your Loan Term" min='0'/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">MonthsEmployed</label>
+            <input class="form-control" type="number" name="MonthsEmployed"
+                placeholder="Enter your Months Employed" min='0'/>
+        </div>
+
+        <div class="mb-3">
+            <input class="btn btn-primary" type="submit" value="Predict Loan Default" required />
+        </div>
+    </form>
+    <h2>
+       THE  prediction is {{results}}
+    </h2>
+   <body>
+</html>
