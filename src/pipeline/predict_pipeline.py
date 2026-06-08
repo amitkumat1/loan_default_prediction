@@ -1,6 +1,7 @@
 import sys
 import os
 import pandas as pd
+import numpy as np
 from src.exception import CustomException
 from src.utils import load_object
 
@@ -17,11 +18,14 @@ class PredictPipeline:
             model=load_object(file_path=model_path)
             preprocessor=load_object(file_path=preprocessor_path)
             print("After Loading")
-            # Fill missing values to avoid None being passed to encoders
+            # Let the saved preprocessor handle missing values (imputation).
+            # Only drop `LoanID` if present.
             try:
-                features = features.fillna('Missing')
+                if 'LoanID' in features.columns:
+                    features = features.drop('LoanID', axis=1)
             except Exception:
                 pass
+            features = features.replace({None: np.nan})
             data_scaled=preprocessor.transform(features)
             preds=model.predict(data_scaled)
             return preds
