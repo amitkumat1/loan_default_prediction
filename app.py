@@ -56,15 +56,20 @@ def predict_datapoint():
 
         predict_pipeline=PredictPipeline()
         print("Mid Prediction")
-        try:
-            results=predict_pipeline.predict(pred_df)
-            print("after Prediction")
-            return render_template('home.html',results=results[0])
         
-        except Exception as e:
-            err = str(e)
-            print("Prediction error:", err)
-            return render_template('home.html', error=err)
+        preds, proba = predict_pipeline.predict(pred_df)
+        print("after Prediction")
+        # Map numeric prediction to human-readable label
+        pred_label = 'Default' if float(preds[0]) == 1.0 else 'No Default'
+        prob_val = None
+        if proba is not None:
+            try:
+                prob_val = float(proba[0][1])
+            except Exception:
+                prob_val = None
+        prob_display = f"{prob_val:.2f}" if prob_val is not None else None
+        return render_template('home.html', results=pred_label, probability=prob_display)
+       
     
 
 if __name__=="__main__":

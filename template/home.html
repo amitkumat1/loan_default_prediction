@@ -8,9 +8,9 @@
         </h1>
         <div class="mb-3">
             <label class="form-label">MaritalStatus</label>
-            <select class="form-control" name="marital_status" placeholder="Enter your Marital Status" required>
+            <select class="form-control" name="MaritalStatus" placeholder="Enter your Marital Status" required>
                 <option class="placeholder" selected disabled value="">Select your Marital Status</option>
-                <option value="single">
+                <option value="Single">
                     Single
                 </option>
                 <option value="Divorced">
@@ -167,8 +167,11 @@
             <input class="btn btn-primary" type="submit" value="Predict Loan Default" required />
         </div>
     </form>
-    <h2>
-       THE  prediction is {{results}}
-    </h2>
+     <h2>
+         THE prediction is {{ results }}
+     </h2>
+     {% if probability %}
+     <h3>Probability of default: {{ probability }}</h3>
+     {% endif %}
    <body>
 </html>

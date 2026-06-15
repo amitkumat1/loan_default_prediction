@@ -28,7 +28,13 @@ class PredictPipeline:
             features = features.replace({None: np.nan})
             data_scaled=preprocessor.transform(features)
             preds=model.predict(data_scaled)
-            return preds
+            proba = None
+            if hasattr(model, 'predict_proba'):
+                try:
+                    proba = model.predict_proba(data_scaled)
+                except Exception:
+                    proba = None
+            return preds, proba
         
         except Exception as e:
             raise CustomException(e,sys)
